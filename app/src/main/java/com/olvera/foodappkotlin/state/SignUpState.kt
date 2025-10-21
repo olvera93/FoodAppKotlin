@@ -10,5 +10,8 @@ data class SignUpState(
     val roles: List<String> = emptyList(),
     val nameError: String? = null,
     val emailError: String? = null,
-    val passwordError: String? = null
+    val passwordError: String? = null,
+    val addressError: String? = null,
+    val phoneNumberError: String? = null,
+    val rolesError: String? = null
 )

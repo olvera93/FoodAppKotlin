@@ -44,9 +44,21 @@ class SignUpViewModel @Inject constructor(
                 _signUpState.update { it.copy(password = event.password) }
             }
 
+            is SignUpEvent.AddressChanged -> {
+                _signUpState.update { it.copy(address = event.address) }
+            }
+            is SignUpEvent.PhoneNumberChanged -> {
+                _signUpState.update { it.copy(phoneNumber = event.phoneNumber) }
+            }
+            is SignUpEvent.RolesChanged -> {
+                _signUpState.update { it.copy(roles = event.roles) }
+            }
+
             is SignUpEvent.SignUp -> {
                 signUp()
             }
+
+
         }
     }
 
