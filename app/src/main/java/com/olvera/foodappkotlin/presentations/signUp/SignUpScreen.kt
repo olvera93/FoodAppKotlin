@@ -1,6 +1,8 @@
 package com.olvera.foodappkotlin.presentations.signUp
 
+import android.os.Build
 import android.widget.Toast
+import androidx.annotation.RequiresExtension
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -25,14 +27,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.olvera.foodappkotlin.R
 import com.olvera.foodappkotlin.components.FoodTextField
 import com.olvera.foodappkotlin.state.SignUpEvent
 import com.olvera.foodappkotlin.util.NetworkResult
 
+@RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
 @Composable
 fun SignUpScreen(
     modifier: Modifier = Modifier,
@@ -74,17 +81,21 @@ fun SignUpScreen(
     ) {
 
         Text(
-            text = "Create an Account",
-            style = MaterialTheme.typography.headlineMedium
+            text = stringResource(R.string.sign_up_title),
+            style = MaterialTheme.typography.headlineMedium,
+            fontSize = 35.sp,
+            color = MaterialTheme.colorScheme.onPrimaryContainer,
+            textAlign = TextAlign.Center,
+            fontWeight = FontWeight.Bold
         )
 
         Spacer(modifier = Modifier.height(32.dp))
 
         FoodTextField(
             modifier = Modifier.fillMaxWidth(),
-            label = "Name",
+            label = stringResource(R.string.sign_up_name),
             value = signUpState.name,
-            placeholder = "Enter your full name",
+            placeholder = stringResource(R.string.sign_up_placeholder_name),
             onValueChange = { newValue ->
                 viewModel.onEvent(SignUpEvent.NameChanged(newValue))
             },
@@ -100,9 +111,9 @@ fun SignUpScreen(
 
         FoodTextField(
             modifier = Modifier.fillMaxWidth(),
-            label = "Email",
+            label = stringResource(R.string.sign_up_email),
             value = signUpState.email,
-            placeholder = "Enter your email",
+            placeholder = stringResource(R.string.sign_up_placeholder_email),
             onValueChange = { newValue ->
                 viewModel.onEvent(SignUpEvent.EmailChanged(newValue))
             },
@@ -119,9 +130,9 @@ fun SignUpScreen(
         // Password TextField
         FoodTextField(
             modifier = Modifier.fillMaxWidth(),
-            label = "Password",
+            label = stringResource(R.string.sign_up_password),
             value = signUpState.password,
-            placeholder = "Enter your password",
+            placeholder = stringResource(R.string.sign_up_placeholder_password),
             onValueChange = { newValue ->
                 viewModel.onEvent(SignUpEvent.PasswordChanged(newValue))
             },
@@ -144,9 +155,9 @@ fun SignUpScreen(
 
         FoodTextField(
             modifier = Modifier.fillMaxWidth(),
-            label = "Address",
+            label = stringResource(R.string.sign_up_address),
             value = signUpState.address,
-            placeholder = "Enter your address",
+            placeholder = stringResource(R.string.sign_up_placeholder_address),
             onValueChange = { newValue ->
                 viewModel.onEvent(SignUpEvent.AddressChanged(newValue))
             },
@@ -169,9 +180,9 @@ fun SignUpScreen(
 
         FoodTextField(
             modifier = Modifier.fillMaxWidth(),
-            label = "Phone Number",
+            label = stringResource(R.string.sign_up_phoneNumber),
             value = signUpState.phoneNumber,
-            placeholder = "Enter your number",
+            placeholder = stringResource(R.string.sign_up_placeholder_phoneNumber),
             onValueChange = { newValue ->
                 viewModel.onEvent(SignUpEvent.PhoneNumberChanged(newValue))
             },
@@ -207,7 +218,7 @@ fun SignUpScreen(
                     color = MaterialTheme.colorScheme.onPrimary
                 )
             } else {
-                Text(text = "Sign Up")
+                Text(text = stringResource(R.string.sign_up_button))
             }
         }
 
@@ -215,9 +226,11 @@ fun SignUpScreen(
 
         // Link to Login Screen
         Row {
-            Text(text = "Already have an account? ")
             Text(
-                text = "Login",
+                modifier = Modifier.padding(horizontal = 8.dp),
+                text = stringResource(R.string.sign_up_already_account))
+            Text(
+                text = stringResource(R.string.sign_up_login),
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.clickable { }
             )

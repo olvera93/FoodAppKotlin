@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">FoodAppKotlin</string>
+
+
+    <!-- Sign Up Screen  -->
+    <string name="sign_up_title">Join The Foodie Community</string>
+    <string name="sign_up_name">Name</string>
+    <string name="sign_up_email">Email</string>
+    <string name="sign_up_password">Password</string>
+    <string name="sign_up_address">Address</string>
+    <string name="sign_up_phoneNumber">PhoneNumber</string>
+    <string name="sign_up_placeholder_name">Enter your full name</string>
+    <string name="sign_up_placeholder_email">Enter your email</string>
+    <string name="sign_up_placeholder_password">Enter your password</string>
+    <string name="sign_up_placeholder_address">Enter your address</string>
+    <string name="sign_up_placeholder_phoneNumber">Enter your phone number</string>
+    <string name="sign_up_button">Sign Up</string>
+    <string name="sign_up_already_account">Already have an account?</string>
+    <string name="sign_up_login">Login</string>
+
+
+
 </resources>

@@ -1,5 +1,7 @@
 package com.olvera.foodappkotlin.presentations.signUp
 
+import android.os.Build
+import androidx.annotation.RequiresExtension
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.olvera.foodappkotlin.model.request.RegisterRequest
@@ -30,6 +32,7 @@ class SignUpViewModel @Inject constructor(
     private val _registrationStatus = MutableStateFlow<NetworkResult<Response>>(NetworkResult.Idle())
     val registrationStatus = _registrationStatus.asStateFlow()
 
+    @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
     fun onEvent(event: SignUpEvent) {
         when (event) {
             is SignUpEvent.NameChanged -> {
@@ -62,11 +65,15 @@ class SignUpViewModel @Inject constructor(
         }
     }
 
+    @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
     private fun signUp() {
         val state = _signUpState.value
         val emailResult = validateEmail.execute(state.email)
         val passwordResult = validatePassword.execute(state.password)
         val nameResult = state.name.isNotBlank()
+        val addressResult = state.address.isNotBlank()
+        val phoneNumberResult = state.phoneNumber.isNotBlank()
+
 
         val hasError = listOf(emailResult, passwordResult).any { !it.successful } || !nameResult
 
@@ -75,7 +82,9 @@ class SignUpViewModel @Inject constructor(
                 it.copy(
                     nameError = if (!nameResult) "Name cannot be empty" else null,
                     emailError = emailResult.errorMessage,
-                    passwordError = passwordResult.errorMessage
+                    passwordError = passwordResult.errorMessage,
+                    addressError = if (!addressResult) "Address cannot be empty" else null,
+                    phoneNumberError = if (!phoneNumberResult) "Phone number cannot be empty" else null
                 )
             }
             return
